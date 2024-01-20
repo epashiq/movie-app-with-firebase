@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:movie_app_clean_architecture/core/exeptions/authentication/auth_failed_exception.dart';
@@ -34,9 +37,7 @@ class AuthenticationDataSourceImpl implements AuthenticationDataSource {
         throw AuthenticationFailedException(
             'The account already exists for that email');
       }
-    } catch (e) {
-      print(e);
-    }
+    } catch (e) {}
     return await _auth.createUserWithEmailAndPassword(
         email: email, password: password);
   }
@@ -64,6 +65,52 @@ class AuthenticationDataSourceImpl implements AuthenticationDataSource {
     );
 
     return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
+  @override
+  Future<(String, int?)> verifyPhoneNumber(String number,
+      [int? resendToken]) async {
+    try {
+      final verificationIdCompleter = Completer<String>();
+      final resendTokenComleter = Completer<int?>();
+
+      await FirebaseAuth.instance.verifyPhoneNumber(
+          forceResendingToken: resendToken,
+          phoneNumber: number,
+          verificationCompleted: (PhoneAuthCredential credential) async {
+            log('completed');
+            await _auth.signInWithCredential(credential);
+          },
+          verificationFailed: (FirebaseAuthException e) {
+            if (e.code == 'invalid phone number') {}
+          },
+          codeSent: (String? verificationId, int? resendToken) async {
+            verificationIdCompleter.complete(verificationId);
+            resendTokenComleter.complete(resendToken);
+          },
+          codeAutoRetrievalTimeout: (String verificationId) async {
+            log('Timeout');
+          });
+
+      final verificationId = await verificationIdCompleter.future;
+      final newResendToken = await resendTokenComleter.future;
+      return (verificationId, newResendToken);
+    } on Exception {
+      throw AuthenticationFailedException(
+          'cannot login please try again later');
+    }
+  }
+
+  @override
+  Future<void> passwordReset(String email) async {
+    await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+  }
+
+  @override
+  Future<void> verifyOtp(String otp, String verificationId) async {
+    PhoneAuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: verificationId, smsCode: otp);
+        await FirebaseAuth.instance.signInWithCredential(credential);
   }
 }
 

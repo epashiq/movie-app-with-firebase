@@ -5,7 +5,8 @@ abstract class AuthenticationDataSource{
   Future<UserCredential>signUpAuth(String email,String password);
   Future<void>verifyEmail();
   Future<void>signInWithGoogle();
+  Future<void>passwordReset(String email);
+  Future<(String, int?)>verifyPhoneNumber(String number);
+  Future<void>verifyOtp(String otp, String verificationId);
   Future<void>logOut();
-
-  
 }

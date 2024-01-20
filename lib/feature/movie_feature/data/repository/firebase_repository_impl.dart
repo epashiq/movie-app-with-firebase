@@ -33,6 +33,23 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   Future<void> signInWithGoogle()async {
     datasources.signInWithGoogle();
   }
+  
+  @override
+  Future<void> passwordReset(String email)async {
+    await datasources.passwordReset(email);
+  }
+  
+  @override
+  Future<void> verifyOtp(String otp,String verificationId )async {
+    await datasources.verifyOtp(otp, verificationId);
+  }
+  
+  @override
+  Future<(String, int?)> verifyPhoneNumber(String number)async {
+  return datasources.verifyPhoneNumber(number);
+  }
+  
+
 }
 
 @riverpod

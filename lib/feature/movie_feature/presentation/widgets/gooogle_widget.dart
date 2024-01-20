@@ -22,7 +22,7 @@ class GoogleButton extends ConsumerWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(loginConstants.googletxt),
+              Text(LoginConstants.googletxt,style: (AppTheme.of(context).typography.h400),),
               Image.network(
                 'https://static.secure.website/wscfus/1137012/5526261/google-logo-icon-png-transparent-background-w1000-o.png',
                 height: AppTheme.of(context).spaces.space_300,
