@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movie_app_clean_architecture/feature/api_feature/domain/entity/api_movie_entity.dart';
+import 'package:movie_app_clean_architecture/feature/api_feature/presentation/pages/overview_pages.dart';
+import 'package:movie_app_clean_architecture/feature/api_feature/presentation/pages/profile_page.dart';
 import 'package:movie_app_clean_architecture/feature/movie_feature/presentation/pages/home_page.dart';
 import 'package:movie_app_clean_architecture/feature/movie_feature/presentation/pages/login_page.dart';
 import 'package:movie_app_clean_architecture/feature/movie_feature/presentation/pages/otp_verification_page.dart';
@@ -16,7 +19,7 @@ final _router = GoRouter(
       builder: (context, state) => const HomePage(),
       redirect: (context, state) {
         final user = FirebaseAuth.instance.currentUser;
-        if (user == null || !user.emailVerified) {
+        if (user == null || (!user.emailVerified && user.phoneNumber == null)) {
           return LoginPage.routPath;
         }
         return null;
@@ -37,7 +40,16 @@ final _router = GoRouter(
     GoRoute(
       path: OtpVerification.routPath,
       builder: (context, state) => const OtpVerification(),
-    )
+    ),
+    GoRoute(
+      path: ProfilePage.routPath,
+      builder: (context, state) => const ProfilePage(),
+    ),
+     GoRoute(
+      path: OverViewPage.routPath,
+      builder: (context, state) =>  OverViewPage(entity: state.extra as ApiEntity,),
+      
+    ),
   ],
 );
 

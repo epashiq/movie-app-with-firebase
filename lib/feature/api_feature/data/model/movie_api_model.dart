@@ -7,10 +7,10 @@ part 'movie_api_model.g.dart';
 @freezed
 class MovieModel with _$MovieModel{
   const factory MovieModel({
-    @JsonKey(name: 'page')required int page,
+    @JsonKey(name: 'page')required int? page,
     @JsonKey(name: 'results')required List<Result> results,
-    @JsonKey(name: 'total page')required int totalPage,
-    @JsonKey(name: 'total results')required int totalResults,
+    @JsonKey(name: 'total_pages')required int? totalPage,
+    @JsonKey(name: 'total_results')required int? totalResults,
     
   })=_MovieModel;
 
@@ -22,8 +22,8 @@ class Result with _$Result{
   const factory Result({
     @JsonKey(name: "adult") required bool adult,
     @JsonKey(name: "backdrop_path") required String backdropPath,
-    @JsonKey(name: "genre_ids") required List<int> genreIds,
-    @JsonKey(name: "id") required int id,
+    @JsonKey(name: "genre_ids") required List<int?> genreIds,
+    @JsonKey(name: "id") required int? id,
     @JsonKey(name: "original_language") required String originalLanguage,
     @JsonKey(name: "original_title") required String originalTitle,
     @JsonKey(name: "overview") required String overview,
@@ -33,7 +33,8 @@ class Result with _$Result{
     @JsonKey(name: "title") required String title,
     @JsonKey(name: "video") required bool video,
     @JsonKey(name: "vote_average") required double voteAverage,
-    @JsonKey(name: "vote_count") required int voteCount,
+    @JsonKey(name: "vote_count") required int? voteCount,
+    
   })= _Result;
 
   factory Result.fromJson(Map<String,dynamic>json )=>_$ResultFromJson(json);

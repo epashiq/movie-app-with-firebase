@@ -107,7 +107,7 @@ class AuthenticationDataSourceImpl implements AuthenticationDataSource {
   }
 
   @override
-  Future<void> verifyOtp(String otp, String verificationId) async {
+  Future<void> verifyOtp(String verificationId, String otp, ) async {
     PhoneAuthCredential credential = PhoneAuthProvider.credential(
         verificationId: verificationId, smsCode: otp);
         await FirebaseAuth.instance.signInWithCredential(credential);

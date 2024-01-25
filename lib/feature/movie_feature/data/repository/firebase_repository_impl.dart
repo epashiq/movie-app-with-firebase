@@ -40,8 +40,8 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   }
   
   @override
-  Future<void> verifyOtp(String otp,String verificationId )async {
-    await datasources.verifyOtp(otp, verificationId);
+  Future<void> verifyOtp(String verificationId, String otp, )async {
+    await datasources.verifyOtp(verificationId, otp);
   }
   
   @override

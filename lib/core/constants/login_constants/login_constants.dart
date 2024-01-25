@@ -11,7 +11,8 @@ class LoginConstants {
   static const googletxt = 'continue with';
   static const forgotPassTxt = 'Forgot Password?';
   static const phoneTxt = 'Verify with phone number';
-  static const phoneNbr= 'Phone Number';
+  static const phoneNbr = 'Phone Number';
   static const submitBtn = 'Submit';
   static const otpTxt = 'confirm';
+  static const otpText = 'enter otp';
 }

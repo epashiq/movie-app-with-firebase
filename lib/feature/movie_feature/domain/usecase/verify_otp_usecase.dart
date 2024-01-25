@@ -6,7 +6,7 @@ final class VerifyOtpUsecase{
   VerifyOtpUsecase({required this.repository});
   Future<void>call(String verificationId,String otp)async{
     try{
-      await repository.verifyOtp(otp, verificationId);
+      await repository.verifyOtp(verificationId, otp);
     }on Exception{
       throw BaseException('verification failed please try again later');
     }

@@ -7,6 +7,6 @@ abstract class AuthenticationDataSource{
   Future<void>signInWithGoogle();
   Future<void>passwordReset(String email);
   Future<(String, int?)>verifyPhoneNumber(String number);
-  Future<void>verifyOtp(String otp, String verificationId);
+  Future<void>verifyOtp(String verificationId ,String otp, );
   Future<void>logOut();
 }

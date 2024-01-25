@@ -19,7 +19,7 @@ import 'package:movie_app_clean_architecture/feature/movie_feature/presentation/
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'auth_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class Authentication extends _$Authentication {
   late final AuthenticationRepository repository;
   @override
@@ -90,7 +90,7 @@ class Authentication extends _$Authentication {
   Future<void> verifyOtp(BuildContext context, String otp) async {
     try {
       await VerifyOtpUsecase(repository: repository)(state.verificationId, otp);
-      Future.sync(() => context.push(HomePage.routePath));
+      Future.sync(() => context.go(HomePage.routePath));
     } on BaseException catch (e) {
       Future.sync(() => SnackbarUtils.showMessage(context, e.message));
     }

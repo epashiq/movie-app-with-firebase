@@ -8,6 +8,9 @@ class AppColorExtension extends ThemeExtension<AppColorExtension> {
   final Color textSubtle;
   final Color textSubtlest;
   final Color backgroundDanger;
+  final Color appbarTxtClr;
+  final Color blackClr;
+  final Color whtClr;
 
   AppColorExtension({
     required this.primary,
@@ -17,6 +20,9 @@ class AppColorExtension extends ThemeExtension<AppColorExtension> {
     required this.textSubtle,
     required this.textSubtlest,
     required this.backgroundDanger,
+    required this.appbarTxtClr,
+    required this.blackClr,
+    required this.whtClr
   });
 
   @override
@@ -28,6 +34,9 @@ class AppColorExtension extends ThemeExtension<AppColorExtension> {
     Color? textSubtle,
     Color? textSubtlest,
     Color? backgroundDanger,
+    Color? appbarTxtClr,
+    Color? blackClr,
+    Color? whtClr,
   }) {
     return AppColorExtension(
       primary: primary ?? this.primary,
@@ -37,6 +46,9 @@ class AppColorExtension extends ThemeExtension<AppColorExtension> {
       textSubtle: textSubtle ?? this.textSubtle,
       textSubtlest: textSubtlest ?? this.textSubtlest,
       backgroundDanger: backgroundDanger ?? this.backgroundDanger,
+      appbarTxtClr:appbarTxtClr?? this.appbarTxtClr,
+      blackClr: blackClr?? this.blackClr,
+      whtClr: whtClr?? this.whtClr,
     );
   }
 
@@ -56,6 +68,9 @@ class AppColorExtension extends ThemeExtension<AppColorExtension> {
       textSubtlest: Color.lerp(textSubtlest, other.textSubtlest, t)!,
       backgroundDanger:
           Color.lerp(backgroundDanger, other.backgroundDanger, t)!,
+          appbarTxtClr:Color.lerp(appbarTxtClr, other.appbarTxtClr, t)!,
+          blackClr: Color.lerp(blackClr, other.blackClr, t)!,
+          whtClr: Color.lerp(whtClr, other.whtClr, t)!
     );
   }
 }
