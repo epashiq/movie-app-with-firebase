@@ -5,38 +5,38 @@ import 'package:movie_app_clean_architecture/feature/api_feature/domain/reposito
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'movie_repository_impl.g.dart';
 
-class ApiMovieRepositoryImpl implements ApiMovieRepository{
+class ApiMovieRepositoryImpl implements ApiMovieRepository {
   final ApiServiceDataSource dataSource;
   ApiMovieRepositoryImpl({required this.dataSource});
 
   @override
-  Future<List<ApiEntity>> fetchMovies() async{
-    final ds= await dataSource.fetchMovies();
-  
+  Future<List<ApiEntity>> fetchMovies() async {
+    final ds = await dataSource.fetchMovies();
 
-  late List<ApiEntity> results;
-  
-      results= [
+    late List<ApiEntity> results;
+
+    results = [
       for (final result in ds.results)
         ApiEntity(
-            originalTitle: result.originalTitle,
-            overview: result.overview,
-            posterPath: result.posterPath,
-            title: result.title,
-            originalLanguage: result.originalLanguage,
-            releaseDate:result.releaseDate,
-            backdropPath:result.backdropPath,
-            voteAverage:result.voteAverage,
-            voteCount:result.voteCount,
-            
-            )
+          id: result.id!,
+          originalTitle: result.originalTitle,
+          overview: result.overview,
+          posterPath: result.posterPath,
+          title: result.title,
+          originalLanguage: result.originalLanguage,
+          releaseDate: result.releaseDate,
+          backdropPath: result.backdropPath,
+          voteAverage: result.voteAverage,
+          voteCount: result.voteCount,
+        )
     ];
     return results;
-   
-}
+  }
+
 }
 
 @riverpod
-ApiMovieRepository movieRepository (MovieRepositoryRef ref ){
- return ApiMovieRepositoryImpl(dataSource: ref.watch(apiServiceDataSourceProvider));
+ApiMovieRepository movieRepository(MovieRepositoryRef ref) {
+  return ApiMovieRepositoryImpl(
+      dataSource: ref.watch(apiServiceDataSourceProvider));
 }

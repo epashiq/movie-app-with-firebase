@@ -2,4 +2,5 @@ import 'package:movie_app_clean_architecture/feature/api_feature/domain/entity/a
 
 abstract class ApiMovieRepository{
   Future<List<ApiEntity>>fetchMovies();
+  
 }

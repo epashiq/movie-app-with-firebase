@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:movie_app_clean_architecture/core/constants/home_page_constants/api_constants.dart';
 import 'package:movie_app_clean_architecture/feature/api_feature/data/datasource/api_service_datasource.dart';
@@ -7,6 +8,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'api_service_datasource_impl.g.dart';
 
 class ApiServiceDataSourceImpl implements ApiServiceDataSource {
+  final FirebaseFirestore firestore=FirebaseFirestore.instance;
   static final Dio dio = Dio();
   final token = ApiConstants.token;
   @override

@@ -6,7 +6,8 @@ part 'api_movie_entity.freezed.dart';
 @freezed
 class ApiEntity with _$ApiEntity {
   const factory ApiEntity(
-      {required String title,
+      {required int id,
+      required String title,
       required String originalTitle,
       required String originalLanguage,
       required String overview,

@@ -7,6 +7,6 @@ class ApiConstants {
   static const popToken =
       'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4MGFmNmZmZTNjYWI0YzUyNWQ1MWIwMmI3YjIwZWYyMyIsInN1YiI6IjY1ODE4YzZkY2VkYWM0MDgyNzdkZmJjZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.i_FnRVB_o9hOj39q9hxutPAOFEzJNifDf2UdCE4znDI';
   static const popImgpath = '';
-  static const popMovTxt = 'Upcming Movies';
+  static const popMovTxt = 'Upcoming Movies';
   static const disMovTxt = 'Discover Movies';
 }

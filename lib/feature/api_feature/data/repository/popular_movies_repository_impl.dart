@@ -18,6 +18,7 @@ class PopularMoviesRepositoryImpl implements PopularMoviesRepository {
     results = [
       for (final result in ds.results)
         ApiEntity(
+            id: result.id,
             posterPath: result.posterPath,
             title: result.title,
             originalTitle: result.originalTitle,
