@@ -26,13 +26,12 @@ class ApiMovieRepositoryImpl implements ApiMovieRepository {
           originalLanguage: result.originalLanguage,
           releaseDate: result.releaseDate,
           backdropPath: result.backdropPath,
-          voteAverage: result.voteAverage,
+          // voteAverage: result.voteAverage,
           voteCount: result.voteCount,
         )
     ];
     return results;
   }
-
 }
 
 @riverpod

@@ -15,9 +15,11 @@ class FirebaseModel with _$FirebaseModel {
     required String posterPath,
     required DateTime releaseDate,
     required String backdropPath,
+    // @JsonKey(name: "vote_average") required double voteAverage,
+    required int? voteCount,
   }) = _FirebaseModel;
 
-   factory FirebaseModel.fromJson(Map<String, dynamic> json) =>
+  factory FirebaseModel.fromJson(Map<String, dynamic> json) =>
       _$FirebaseModelFromJson(json);
   factory FirebaseModel.fromFirestore(
     DocumentSnapshot<Map<String, dynamic>> snapshot,

@@ -26,7 +26,7 @@ class PopularMoviesRepositoryImpl implements PopularMoviesRepository {
             overview: result.overview,
             releaseDate: result.releaseDate,
             backdropPath: result.backdropPath,
-            voteAverage: result.voteAverage,
+            // voteAverage: result.voteAverage,
             voteCount: result.voteCount),
     ];
     return results;

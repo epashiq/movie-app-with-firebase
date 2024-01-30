@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_app_clean_architecture/feature/api_feature/domain/entity/api_movie_entity.dart';
+import 'package:movie_app_clean_architecture/feature/api_feature/presentation/pages/favourite_movies_page.dart';
 import 'package:movie_app_clean_architecture/feature/api_feature/presentation/pages/overview_pages.dart';
 import 'package:movie_app_clean_architecture/feature/api_feature/presentation/pages/profile_page.dart';
 import 'package:movie_app_clean_architecture/feature/movie_feature/presentation/pages/home_page.dart';
@@ -50,6 +51,9 @@ final _router = GoRouter(
       builder: (context, state) =>  OverViewPage(entity: state.extra as ApiEntity,),
       
     ),
+    GoRoute(path: FavouriteMovies.routPath,
+    builder: (context, state) => const FavouriteMovies(),
+    )
   ],
 );
 
