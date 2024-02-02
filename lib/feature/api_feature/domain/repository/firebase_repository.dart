@@ -4,4 +4,5 @@ abstract class FirebaseRepository {
   Future<void> addToFireStore(ApiEntity entity);
   Future<void> deleteFromFirestore(int id);
   Stream<List<ApiEntity>>getAllMovies();
+  
 }

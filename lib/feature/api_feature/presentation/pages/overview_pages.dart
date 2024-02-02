@@ -5,6 +5,7 @@ import 'package:movie_app_clean_architecture/core/constants/home_page_constants/
 import 'package:movie_app_clean_architecture/core/theme/app_theme.dart';
 import 'package:movie_app_clean_architecture/feature/api_feature/domain/entity/api_movie_entity.dart';
 import 'package:movie_app_clean_architecture/feature/api_feature/presentation/provider/api_movie_provider.dart';
+import 'package:movie_app_clean_architecture/feature/api_feature/presentation/widgets/bottom_sheet_widget.dart';
 import 'package:movie_app_clean_architecture/feature/api_feature/presentation/widgets/container_widget.dart';
 import 'package:movie_app_clean_architecture/feature/api_feature/presentation/widgets/tr_button_widget.dart';
 
@@ -56,15 +57,32 @@ class OverViewPage extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const TrailerButton(),
-                IconButton(
-                    onPressed: () {
-                      ref.read(movieProvider.notifier).addToFireStore(entity);
-                    },
-                    icon: Icon(
-                      Icons.bookmark_border_rounded,
-                      size: AppTheme.of(context).spaces.space_500,
-                      color: AppTheme.of(context).colors.whtClr,
-                    ))
+                StreamBuilder(
+                    stream: ref.watch(movieProvider).value!.favMovieStream,
+                    builder: (context, snapshot) {
+                      final isFavmov = ref
+                          .read(movieProvider.notifier)
+                          .isFavourite(entity.id);
+                      return IconButton(
+                          onPressed: () {
+                            if (isFavmov) {
+                              ref
+                                  .read(movieProvider.notifier)
+                                  .deleteFromFirestore(entity.id);
+                            } else {
+                              ref
+                                  .read(movieProvider.notifier)
+                                  .addToFireStore(entity);
+                            }
+                          },
+                          icon: Icon(
+                            isFavmov
+                                ? Icons.bookmark
+                                : Icons.bookmark_border_rounded,
+                            size: AppTheme.of(context).spaces.space_500,
+                            color: AppTheme.of(context).colors.whtClr,
+                          ));
+                    })
               ],
             ),
             SizedBox(
@@ -96,6 +114,37 @@ class OverViewPage extends ConsumerWidget {
                         })
                 ],
               )),
+            ),
+            SizedBox(
+              height: AppTheme.of(context).spaces.space_150,
+            ),
+            BottomSheetWidget(
+              entity: entity,
+            ),
+            StreamBuilder(
+              stream: ref
+                  .watch(movieProvider.notifier)
+                  .getComment(entity.id.toString()),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return SizedBox(
+                    height: 300,
+                    child: ListView.builder(
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) => ListTile(
+                        title: Text(
+                          snapshot.data![index].text,
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  );
+                } else if (snapshot.hasError) {
+                  return const Text('error');
+                } else {
+                  return const CircularProgressIndicator();
+                }
+              },
             )
           ],
         ),

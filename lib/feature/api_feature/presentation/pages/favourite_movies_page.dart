@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:movie_app_clean_architecture/core/constants/home_page_constants/api_constants.dart';
+import 'package:movie_app_clean_architecture/core/theme/app_theme.dart';
 import 'package:movie_app_clean_architecture/feature/api_feature/presentation/provider/api_movie_provider.dart';
 import 'package:movie_app_clean_architecture/feature/api_feature/presentation/widgets/gridview_widget.dart';
 
@@ -12,18 +14,20 @@ class FavouriteMovies extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.amber,
+        title: Text(
+          ApiConstants.favtxt,
+          style: AppTheme.of(context).typography.h700,
+        ),
+        centerTitle: true,
       ),
       body: StreamBuilder(
         stream: ref.read(movieProvider.notifier).getAllMovies(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return GridViewWidget(
-              
                 itemCount: snapshot.data!.length, list: snapshot.data!);
           } else if (snapshot.hasError) {
-            return TextButton(onPressed: () {
-
-            }, child: const Text('retry'));
+            return TextButton(onPressed: () {}, child: const Text('retry'));
           } else {
             return const Center(
               child: CircularProgressIndicator(),

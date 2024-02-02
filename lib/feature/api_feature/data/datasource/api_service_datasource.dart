@@ -2,4 +2,5 @@ import 'package:movie_app_clean_architecture/feature/api_feature/data/model/movi
 
 abstract class ApiServiceDataSource{
   Future<MovieModel>fetchMovies();
+  Future<MovieModel>serchMovies(String text);
 }

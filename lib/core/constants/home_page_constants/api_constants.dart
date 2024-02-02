@@ -9,4 +9,7 @@ class ApiConstants {
   static const popImgpath = '';
   static const popMovTxt = 'Upcoming Movies';
   static const disMovTxt = 'Discover Movies';
+  static const favtxt = 'Favourite Movies';
+  static const searchAppBarTxt = 'Serch Movies';
+  static const searchHintTxt = 'Search';
 }

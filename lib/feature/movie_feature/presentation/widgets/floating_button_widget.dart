@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_app_clean_architecture/core/theme/app_theme.dart';
 import 'package:movie_app_clean_architecture/feature/api_feature/presentation/pages/favourite_movies_page.dart';
+import 'package:movie_app_clean_architecture/feature/api_feature/presentation/pages/search_movies.dart';
 
 class BottomNavigationBarWidget extends StatelessWidget {
   const BottomNavigationBarWidget({super.key});
@@ -29,6 +30,13 @@ class BottomNavigationBarWidget extends StatelessWidget {
         BottomNavigationBarItem(
             icon: IconButton(
                 onPressed: () {}, icon: const Icon(Icons.person_2_outlined)),
+            label: ''),
+        BottomNavigationBarItem(
+            icon: IconButton(
+                onPressed: () {
+                  context.push(SearchPage.routPath);
+                },
+                icon: const Icon(Icons.search)),
             label: ''),
       ],
     );

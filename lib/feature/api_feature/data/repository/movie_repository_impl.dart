@@ -20,15 +20,35 @@ class ApiMovieRepositoryImpl implements ApiMovieRepository {
         ApiEntity(
           id: result.id!,
           originalTitle: result.originalTitle,
-          overview: result.overview,
-          posterPath: result.posterPath,
-          title: result.title,
+          overview: result.overview ?? '',
+          posterPath: result.posterPath ?? '',
+          title: result.title ?? '',
           originalLanguage: result.originalLanguage,
-          releaseDate: result.releaseDate,
+          releaseDate: DateTime.tryParse(result.releaseDate ?? '') ?? DateTime.now(),
           backdropPath: result.backdropPath,
           // voteAverage: result.voteAverage,
           voteCount: result.voteCount,
         )
+    ];
+    return results;
+  }
+
+  @override
+  Future<List<ApiEntity>> serachMovies(String text) async {
+    final ds = await dataSource.serchMovies(text);
+    late List<ApiEntity> results;
+    results = [
+      for (final result in ds.results)
+        ApiEntity(
+            id: result.id!,
+            title: result.title ?? '',
+            originalTitle: result.originalTitle,
+            originalLanguage: result.originalLanguage,
+            overview: result.overview ?? '',
+            posterPath: result.posterPath ?? '',
+            releaseDate: DateTime.tryParse(result.releaseDate ?? '') ?? DateTime.now(),
+            backdropPath: result.backdropPath,
+            voteCount: result.voteCount)
     ];
     return results;
   }

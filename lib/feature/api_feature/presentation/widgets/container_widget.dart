@@ -24,22 +24,22 @@ class ContainerWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
-                  'Rating',
+                  'language',
                   style: TextStyle(color: AppTheme.of(context).colors.whtClr),
                 ),
-                // Text(
-                //   entity.voteAverage.toString(),
-                //   style: AppTheme.of(context)
-                //       .typography
-                //       .h700
-                //       .copyWith(color: AppTheme.of(context).colors.whtClr),
-                // )
+                Text(
+                  entity.originalLanguage.toString(),
+                  style: AppTheme.of(context)
+                      .typography
+                      .h700
+                      .copyWith(color: AppTheme.of(context).colors.whtClr),
+                )
               ]),
         ),
 
         Container(
-          height: AppTheme.of(context).spaces.space_700 * 1.3,
-          width: AppTheme.of(context).spaces.space_700 * 1.3,
+          height: AppTheme.of(context).spaces.space_700 * 1.4,
+          width: AppTheme.of(context).spaces.space_700 * 1.4,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(1),
               border: Border.all(

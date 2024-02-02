@@ -4,5 +4,5 @@ import 'package:movie_app_clean_architecture/feature/api_feature/data/model/fire
 abstract class FirebaseDataSource {
   Future<void> addToFireStore(FirebaseModel model);
   Future<void> deleteFromFirestore(int id);
-  Stream<QuerySnapshot<FirebaseModel>> getAllMovies( );
+  Stream<QuerySnapshot<FirebaseModel>> getAllMovies();
 }

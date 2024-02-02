@@ -4,6 +4,7 @@ import 'package:movie_app_clean_architecture/feature/api_feature/domain/entity/a
 import 'package:movie_app_clean_architecture/feature/api_feature/presentation/pages/favourite_movies_page.dart';
 import 'package:movie_app_clean_architecture/feature/api_feature/presentation/pages/overview_pages.dart';
 import 'package:movie_app_clean_architecture/feature/api_feature/presentation/pages/profile_page.dart';
+import 'package:movie_app_clean_architecture/feature/api_feature/presentation/pages/search_movies.dart';
 import 'package:movie_app_clean_architecture/feature/movie_feature/presentation/pages/home_page.dart';
 import 'package:movie_app_clean_architecture/feature/movie_feature/presentation/pages/login_page.dart';
 import 'package:movie_app_clean_architecture/feature/movie_feature/presentation/pages/otp_verification_page.dart';
@@ -53,6 +54,9 @@ final _router = GoRouter(
     ),
     GoRoute(path: FavouriteMovies.routPath,
     builder: (context, state) => const FavouriteMovies(),
+    ),
+    GoRoute(path: SearchPage.routPath,
+    builder: (context, state) => const SearchPage(),
     )
   ],
 );
