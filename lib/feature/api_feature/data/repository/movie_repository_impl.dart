@@ -25,7 +25,7 @@ class ApiMovieRepositoryImpl implements ApiMovieRepository {
           title: result.title ?? '',
           originalLanguage: result.originalLanguage,
           releaseDate: DateTime.tryParse(result.releaseDate ?? '') ?? DateTime.now(),
-          backdropPath: result.backdropPath,
+          backdropPath: result.backdropPath ?? '',
           // voteAverage: result.voteAverage,
           voteCount: result.voteCount,
         )
@@ -47,7 +47,7 @@ class ApiMovieRepositoryImpl implements ApiMovieRepository {
             overview: result.overview ?? '',
             posterPath: result.posterPath ?? '',
             releaseDate: DateTime.tryParse(result.releaseDate ?? '') ?? DateTime.now(),
-            backdropPath: result.backdropPath,
+            backdropPath: result.backdropPath ?? '',
             voteCount: result.voteCount)
     ];
     return results;

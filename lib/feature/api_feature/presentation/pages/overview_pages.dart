@@ -5,9 +5,11 @@ import 'package:movie_app_clean_architecture/core/constants/home_page_constants/
 import 'package:movie_app_clean_architecture/core/theme/app_theme.dart';
 import 'package:movie_app_clean_architecture/feature/api_feature/domain/entity/api_movie_entity.dart';
 import 'package:movie_app_clean_architecture/feature/api_feature/presentation/provider/api_movie_provider.dart';
+import 'package:movie_app_clean_architecture/feature/api_feature/presentation/provider/trailer_provider.dart';
 import 'package:movie_app_clean_architecture/feature/api_feature/presentation/widgets/bottom_sheet_widget.dart';
 import 'package:movie_app_clean_architecture/feature/api_feature/presentation/widgets/container_widget.dart';
 import 'package:movie_app_clean_architecture/feature/api_feature/presentation/widgets/tr_button_widget.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class OverViewPage extends ConsumerWidget {
   static const routPath = '/overview';
@@ -131,10 +133,24 @@ class OverViewPage extends ConsumerWidget {
                     height: 300,
                     child: ListView.builder(
                       itemCount: snapshot.data!.length,
-                      itemBuilder: (context, index) => ListTile(
-                        title: Text(
-                          snapshot.data![index].text,
-                          style: const TextStyle(color: Colors.white),
+                      itemBuilder: (context, index) => Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Card(
+                          color: AppTheme.of(context).colors.whtClr,
+                          child: ListTile(
+                            title: Text(
+                              snapshot.data![index].text,
+                              style: const TextStyle(
+                                  color: Colors.black, fontSize: 20),
+                            ),
+                            leading: Text(
+                              '${index + 1}',
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            trailing: IconButton(
+                                onPressed: () {},
+                                icon: Icon(Icons.delete_sharp)),
+                          ),
                         ),
                       ),
                     ),
@@ -145,7 +161,53 @@ class OverViewPage extends ConsumerWidget {
                   return const CircularProgressIndicator();
                 }
               },
-            )
+            ),
+            ref.watch(trailerProvider(entity.id.toString())).isRefreshing
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Center(
+                    child: SizedBox(
+                      height: MediaQuery.sizeOf(context).height * .24,
+                      child: Center(
+                        child: switch (
+                            ref.watch(trailerProvider(entity.id.toString()))) {
+                          AsyncData(:final value) => PageView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: value.length,
+                              itemBuilder: (context, index) {
+                                return YoutubePlayer(
+                                  controller: YoutubePlayerController(
+                                    initialVideoId: value[index].key,
+                                    flags: const YoutubePlayerFlags(
+                                      autoPlay: false,
+                                      mute: false,
+                                      disableDragSeek: true,
+                                    ),
+                                  ),
+                                  bufferIndicator: const Center(
+                                      child: CircularProgressIndicator()),
+                                  showVideoProgressIndicator: true,
+                                );
+                              },
+                            ),
+                          AsyncError(:final error) => Column(
+                              children: [
+                                Text("$error"),
+                                TextButton(
+                                  onPressed: () {
+                                    ref.invalidate(
+                                        trailerProvider(entity.id.toString()));
+                                  },
+                                  child: const Text('Retry'),
+                                )
+                              ],
+                            ),
+                          _ => const CircularProgressIndicator()
+                        },
+                      ),
+                    ),
+                  ),
           ],
         ),
       ),

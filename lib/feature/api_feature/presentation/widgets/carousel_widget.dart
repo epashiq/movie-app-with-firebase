@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -17,7 +19,15 @@ class CarouselWidget extends StatelessWidget {
     return SizedBox(
       child: CarouselSlider.builder(
           itemCount: itemCount,
-          itemBuilder: (context, index, realIndex) => InkWell(
+          itemBuilder: (context, index, realIndex) {
+            final posterPathFile = File(list[index].posterPath);
+            late final ImageProvider image;
+            if(posterPathFile.existsSync()){
+              image = FileImage(posterPathFile);
+            }else{
+              image =NetworkImage(ApiConstants.imagePath + list[index].posterPath);
+            }
+          return InkWell(
                 onTap: () =>
                     context.push(OverViewPage.routPath, extra: list[index]),
                 child: ClipRRect(
@@ -32,7 +42,7 @@ class CarouselWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
+              );},
           options: CarouselOptions(
             height: 350,
             aspectRatio: 16 / 9,

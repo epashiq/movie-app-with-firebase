@@ -74,7 +74,7 @@ class HomePage extends ConsumerWidget {
                                   color: AppTheme.of(context).colors.primary,
                                   child: Image.network(
                                     ApiConstants.imagePath +
-                                        value.popular[index].backdropPath,
+                                        value.movies[index].backdropPath,
                                     fit: BoxFit.cover,
                                   ),
                                 ),
