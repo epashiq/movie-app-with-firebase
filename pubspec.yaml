@@ -57,6 +57,7 @@ dependencies:
   build: ^2.4.1
   objectbox_flutter_libs: ^2.4.0
   youtube_player_flutter: ^8.1.2
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:

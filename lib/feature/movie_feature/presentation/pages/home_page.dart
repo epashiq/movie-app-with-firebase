@@ -104,7 +104,7 @@ class HomePage extends ConsumerWidget {
                           child: GridViewWidget(
                               itemCount: value.movies.length,
                               list: value.movies),
-                        )
+                        ),
                       ],
                     ),
                   ),

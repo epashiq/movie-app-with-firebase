@@ -21,6 +21,7 @@ class CarouselWidget extends StatelessWidget {
           itemCount: itemCount,
           itemBuilder: (context, index, realIndex) {
             final posterPathFile = File(list[index].posterPath);
+            // ignore: unused_local_variable
             late final ImageProvider image;
             if(posterPathFile.existsSync()){
               image = FileImage(posterPathFile);

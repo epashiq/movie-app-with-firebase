@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'dart:convert';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -22,15 +24,15 @@ class TrailerModel with _$TrailerModel {
 @freezed
 class Result with _$Result {
     const factory Result({
-        required String iso6391,
-        required String iso31661,
+       @JsonKey(name: "iso_639_1") required String iso6391,
+       @JsonKey(name: "iso_3166_1") required String iso31661,
         required String name,
         required String key,
         required String site,
         required int size,
         required String type,
         required bool official,
-        required DateTime publishedAt,
+       @JsonKey(name: "published_at") required DateTime publishedAt,
         required String id,
     }) = _Result;
 
